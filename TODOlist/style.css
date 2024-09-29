@@ -90,11 +90,17 @@ button {
 }
 
 .todo-check {
-	cursor: cursor;
-	padding: 16px;
-	border-radius: 16px 0 0 16px;
-	background-color: rgb(217, 255, 102);
+    cursor: pointer; /* Cambia il cursore quando si passa sopra */
+    padding: 16px;
+    border-radius: 16px 0 0 16px;
+    background-color: rgb(217, 255, 102);
 }
+
+.todo-check img {
+    width: 24px; /* Regola la larghezza dell'immagine */
+    height: auto; /* Mantieni l'aspetto */
+}
+
 
 .hidden{
     display: none;
