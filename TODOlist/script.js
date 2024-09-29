@@ -2,7 +2,6 @@ const addButton = document.querySelector('.add-todo button');
 const inputField = document.querySelector('.add-todo input');
 const todoList = document.querySelector('.todo-list');
 const emptyListMessage = document.getElementById('message');
-
 const clearButton = document.getElementById('clearButton');
 
 
@@ -14,9 +13,9 @@ function addTodo() {
   const todoText = inputField.value.trim();
 
   if (todoText !== '') {
-    activities.push(todoText); // Aggiungi l'attività all'array
+    activities.push(todoText); 
     inputField.value = '';
-    showActivities(); // Mostra le attività aggiornate
+    showActivities();
   }
 }
 
@@ -51,6 +50,7 @@ function createTodoItem(text, index) {
 
   const todoText = document.createElement('p');
   todoText.classList.add('todo-text');
+  todoText.classList.add('sopra');
   todoText.textContent = text;
 
   // Aggiungi la possibilità di modificare l'attività
@@ -64,10 +64,9 @@ function createTodoItem(text, index) {
 
   // Rimuovi l'attività al click sull'icona
   todoCheck.onclick = () => {
-    if (confirm('Sei sicuro di voler eliminare questa attività?')) {
-      activities.splice(index, 1); // Rimuovi l'attività dall'array
-      showActivities(); // Mostra le attività aggiornate
-    }
+    activities.splice(index, 1); 
+    showActivities(); 
+    
   };
 
   todoItem.appendChild(todoCheck);
@@ -87,8 +86,8 @@ function updateEmptyListMessage() {
 // Pulsante per cancellare tutte le attività
 clearButton.onclick = () => {
   if (confirm('Sei sicuro di voler cancellare tutti gli elementi?')) {
-    activities = []; // Svuota l'array
-    showActivities(); // Mostra le attività aggiornate
+    activities = []; 
+    showActivities();
   }
 };
 
