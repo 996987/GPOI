@@ -3,23 +3,35 @@ const inputField = document.querySelector('.add-todo input');
 const todoList = document.querySelector('.todo-list');
 const emptyListMessage = document.getElementById('message');
 
-const clearButton = document.createElement('button');
-clearButton.textContent = 'Cancella Tutto';
-clearButton.style.marginTop = '16px';
-document.querySelector('main').appendChild(clearButton);
+const clearButton = document.getElementById('clearButton');
 
+
+// Array per gestire le attività
+let activities = [];
+
+// Funzione per aggiungere un'attività
 function addTodo() {
-  const todoText = inputField.value;
-  
-  if (todoText !== '') { 
-    const todoItem = createTodoItem(todoText)
-    todoList.appendChild(todoItem); 
+  const todoText = inputField.value.trim();
+
+  if (todoText !== '') {
+    activities.push(todoText); // Aggiungi l'attività all'array
     inputField.value = '';
-    updateEmptyListMessage(); 
+    showActivities(); // Mostra le attività aggiornate
   }
 }
 
-function createTodoItem(text) {
+// Funzione per visualizzare le attività
+function showActivities() {
+  todoList.innerHTML = ''; // Pulisci la lista esistente
+  activities.forEach((activity, index) => {
+    const todoItem = createTodoItem(activity, index);
+    todoList.appendChild(todoItem);
+  });
+  updateEmptyListMessage(); // Aggiorna il messaggio per la lista vuota
+}
+
+// Funzione per creare un elemento della lista
+function createTodoItem(text, index) {
   const todoItem = document.createElement('li');
   todoItem.classList.add('todo-item');
 
@@ -27,8 +39,9 @@ function createTodoItem(text) {
   todoCheck.classList.add('todo-check');
   todoCheck.innerHTML = '<img src="images/check.svg" alt="Check Icon">';
 
+  // Cambia immagine al passaggio del mouse
   todoCheck.addEventListener('mouseenter', () => {
-    todoCheck.innerHTML = '<img src="images/75519.png" alt="Check Icon">'; // Cambia immagine al passaggio del mouse
+    todoCheck.innerHTML = '<img src="images/75519.png" alt="Check Icon">';
   });
 
   // Ripristina l'immagine quando il mouse esce
@@ -40,9 +53,21 @@ function createTodoItem(text) {
   todoText.classList.add('todo-text');
   todoText.textContent = text;
 
+  // Aggiungi la possibilità di modificare l'attività
+  todoText.onclick = () => {
+    const newText = prompt('Modifica l\'attività:', text);
+    if (newText !== null && newText.trim() !== '') {
+      activities[index] = newText.trim(); // Aggiorna l'attività nell'array
+      showActivities(); // Mostra le attività aggiornate
+    }
+  };
+
+  // Rimuovi l'attività al click sull'icona
   todoCheck.onclick = () => {
-    todoItem.remove();
-    updateEmptyListMessage();
+    if (confirm('Sei sicuro di voler eliminare questa attività?')) {
+      activities.splice(index, 1); // Rimuovi l'attività dall'array
+      showActivities(); // Mostra le attività aggiornate
+    }
   };
 
   todoItem.appendChild(todoCheck);
@@ -51,19 +76,19 @@ function createTodoItem(text) {
   return todoItem;
 }
 
-
 function updateEmptyListMessage() {
   if (todoList.children.length === 0) {
     emptyListMessage.classList.remove('hidden');
-  }else{
+  } else {
     emptyListMessage.classList.add('hidden');
   }
 }
 
+// Pulsante per cancellare tutte le attività
 clearButton.onclick = () => {
   if (confirm('Sei sicuro di voler cancellare tutti gli elementi?')) {
-    todoList.innerHTML = ''; // Cancella la lista
-    updateEmptyListMessage();
+    activities = []; // Svuota l'array
+    showActivities(); // Mostra le attività aggiornate
   }
 };
 
@@ -75,4 +100,5 @@ inputField.addEventListener('keypress', (event) => {
   }
 });
 
+// Mostra il messaggio per la lista vuota all'avvio
 updateEmptyListMessage();

@@ -89,6 +89,10 @@ button {
 	padding: 16px;
 }
 
+.button {
+	margin-top: 16px;
+}
+
 .todo-check {
     cursor: pointer; /* Cambia il cursore quando si passa sopra */
     padding: 16px;
