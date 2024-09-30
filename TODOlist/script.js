@@ -1,12 +1,22 @@
+
 const addButton = document.querySelector('.add-todo button');
 const inputField = document.querySelector('.add-todo input');
 const todoList = document.querySelector('.todo-list');
 const emptyListMessage = document.getElementById('message');
 const clearButton = document.getElementById('clearButton');
 
+//Creao una chiave per il local Storage
+const STORAGE_KEY = '__bool_todo__';
 
 // Array per gestire le attività
 let activities = [];
+
+// Controllo se per caso c'eran delle attività nel local storage
+const storage = localStorage.getItem(STORAGE_KEY);
+
+if(storage){
+  activities = JSON.parse(storage);
+}
 
 // Funzione per aggiungere un'attività
 function addTodo() {
@@ -14,6 +24,7 @@ function addTodo() {
 
   if (todoText !== '') {
     activities.push(todoText); 
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(activities));
     inputField.value = '';
     showActivities();
   }
@@ -65,6 +76,7 @@ function createTodoItem(text, index) {
   // Rimuovi l'attività al click sull'icona
   todoCheck.onclick = () => {
     activities.splice(index, 1); 
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(activities));
     showActivities(); 
     
   };
@@ -87,6 +99,7 @@ function updateEmptyListMessage() {
 clearButton.onclick = () => {
   if (confirm('Sei sicuro di voler cancellare tutti gli elementi?')) {
     activities = []; 
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(activities));
     showActivities();
   }
 };
@@ -99,5 +112,5 @@ inputField.addEventListener('keypress', (event) => {
   }
 });
 
-// Mostra il messaggio per la lista vuota all'avvio
-updateEmptyListMessage();
+// Decide cosa mostrare all'avvio della pagina.
+showActivities();
