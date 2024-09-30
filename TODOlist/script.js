@@ -51,7 +51,7 @@ function createTodoItem(text, index) {
 
   // Cambia immagine al passaggio del mouse
   todoCheck.addEventListener('mouseenter', () => {
-    todoCheck.innerHTML = '<img src="images/75519.png" alt="Check Icon">';
+    todoCheck.innerHTML = '<img src="images/75519.svg" alt="Check Icon">';
   });
 
   // Ripristina l'immagine quando il mouse esce
@@ -95,7 +95,7 @@ function updateEmptyListMessage() {
   }
 }
 
-// Pulsante per cancellare tutte le attività
+
 clearButton.onclick = () => {
   if (confirm('Sei sicuro di voler cancellare tutti gli elementi?')) {
     activities = []; 
