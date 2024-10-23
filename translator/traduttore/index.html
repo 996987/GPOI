@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <!-- Font -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="style.css">
+  
+  <title>Traduttore</title>
+</head>
+<body>
+
+  <div class="container">
+    <header class="panel">
+      <h1>Traduttore</h1>
+      <img src="https://www.buonarroti.tn.it/images/grafica_home/Logo_ITT_avvisi.png" width=250 height=177 alt="">
+    </header>
+
+    <main>
+      <section class="panel controls">
+        <button class="starting-lang-button" data-lang="en">🇬🇧</button>
+        <button class="starting-lang-button" data-lang="fr">🇫🇷</button>
+        <button class="starting-lang-button" data-lang="es">🇪🇸</button>
+        <button class="starting-lang-button" data-lang="it">🇮🇹</button>
+      </section>
+
+      <br>
+      <section class="panel translation hidden">
+        <div class="translation-flag"></div>
+        <div class="translation-result">
+          <p class="translation-text">Traduzione</p>
+        </div>
+      </section>
+
+      <section class="panel translation hidden">
+        <div class="translation-accuracy">
+          <p class="accuracy-score">-</p>
+        </div>
+      </section>
+
+      
+      <section class="panel controls hidden">
+        <textarea class="text-input disable-input" placeholder="inserisci il testo da tradurre" rows="3" ></textarea>
+        <button class="lang-button" data-lang="en">🇬🇧</button>
+        <button class="lang-button" data-lang="fr">🇫🇷</button>
+        <button class="lang-button" data-lang="es">🇪🇸</button>
+        <button class="lang-button" data-lang="it">🇮🇹</button>
+        <button class="reset-button">❌</button>
+      </section>
+    </main>
+  </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
